@@ -16,21 +16,22 @@ const EditPrompt = () => {
   });
 
   useEffect(() => {
-    const getPromptDetails = async () => {
-      try {
-        const response = await fetch(`/api/prompt/${promptId}`);
-        const data = await response.json();
+    if (promptId) {
+      const getPromptDetails = async () => {
+        try {
+          const response = await fetch(`/api/prompt/${promptId}`);
+          const data = await response.json();
 
-        setPost({
-          prompt: data.prompt,
-          tag: data.tag,
-        });
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    if (promptId) getPromptDetails();
+          setPost({
+            prompt: data.prompt,
+            tag: data.tag,
+          });
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      getPromptDetails();
+    }
   }, [promptId]);
 
   const updatePrompt = async (e) => {
